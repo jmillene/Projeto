@@ -14,9 +14,6 @@ export default class UserController {
   public login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const user = await this.service.postlogin(email, password);
-    if (!email || !password) {
-      return res.status(400).json({ message: 'email ou senha inexistente' });
-    }
     const users = user as unknown as IUser;
     const generateToken = this.token.generateToken(
       users.id,

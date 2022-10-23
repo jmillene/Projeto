@@ -12,7 +12,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isLogged, setIsLogged] = useState(false);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
-
   const login = async (event) => {
     event.preventDefault();
 
