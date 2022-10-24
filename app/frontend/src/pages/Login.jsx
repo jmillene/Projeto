@@ -17,7 +17,6 @@ const Login = () => {
 
     try {
       const { token } = await requestLogin('/login', { email, password });
-
       setToken(token);
 
       const { role } = await requestData('/login/validate', { email, password });

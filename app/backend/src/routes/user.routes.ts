@@ -8,5 +8,11 @@ const userRouter = Router();
 const validaPassword = new ValidaPassword();
 const validaEmail = new ValidaEmail();
 const userController = new UserController();
-userRouter.post('/', validaEmail.validaEmail, validaPassword.validaPassword, userController.login);
+userRouter.post(
+  '/login',
+  validaEmail.validaEmail,
+  validaPassword.validaPassword,
+  userController.login,
+);
+userRouter.get('/login/validate', userController.validate);
 export default userRouter;
