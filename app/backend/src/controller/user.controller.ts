@@ -29,6 +29,6 @@ export default class UserController {
     if (!authorization) { return res.status(401).json({ message: 'No token provided.' }); } // verifica se o token existe
     const { role } = this.service.getRole(authorization) as IUser;
 
-    return res.status(201).json({ role });
+    return res.status(200).json({ role });
   };
 }
