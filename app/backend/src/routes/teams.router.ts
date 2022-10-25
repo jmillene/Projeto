@@ -8,4 +8,5 @@ userRouter.get(
   '/',
   teamController.getTeams,
 );
+userRouter.get('/:id', teamController.getTeamsId);
 export default userRouter;

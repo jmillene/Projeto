@@ -6,8 +6,12 @@ export default class TeamsService {
     return teams;
   };
 
-  public getTeamsId = async (id : number) => {
-    const team = await TeamsModel.findByPk(id);
-    return team;
+  public getTeamsId = async (id : string) => {
+    try {
+      const team = await TeamsModel.findByPk(id);
+      return team;
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
