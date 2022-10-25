@@ -26,6 +26,7 @@ class App {
     this.app.use(cors());
     this.app.use('/login', userRouter.userRouter);
     this.app.use('/teams', userRouter.teamRouter);
+    this.app.use('/matches', userRouter.matchesRouter);
     this.app.use(accessControl);
   }
 
