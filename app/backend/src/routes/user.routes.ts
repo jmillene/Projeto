@@ -9,10 +9,10 @@ const validaPassword = new ValidaPassword();
 const validaEmail = new ValidaEmail();
 const userController = new UserController();
 userRouter.post(
-  '/login',
+  '/',
   validaEmail.validaEmail,
   validaPassword.validaPassword,
   userController.login,
 );
-userRouter.get('/login/validate', userController.validate);
+userRouter.get('/validate', userController.validate);
 export default userRouter;

@@ -24,7 +24,8 @@ class App {
 
     this.app.use(express.json());
     this.app.use(cors());
-    this.app.use(userRouter);
+    this.app.use('/login', userRouter.userRouter);
+    this.app.use('/teams', userRouter.teamRouter);
     this.app.use(accessControl);
   }
 
