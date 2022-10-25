@@ -1,12 +1,12 @@
 import { STRING, NUMBER, Model } from 'sequelize';
 import db from '.';
 
-class Team extends Model {
+class Teams extends Model {
   id!: number;
   teamName!: string;
 }
 
-Team.init({
+Teams.init({
   id: {
     type: NUMBER,
     primaryKey: true,
@@ -20,4 +20,4 @@ Team.init({
   underscored: true,
 });
 
-export default Team;
+export default Teams;

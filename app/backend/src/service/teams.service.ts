@@ -2,7 +2,12 @@ import TeamsModel from '../database/models/Teams';
 
 export default class TeamsService {
   public getTeams = async () => {
-    const team = await TeamsModel.findAll();
+    const teams = await TeamsModel.findAll();
+    return teams;
+  };
+
+  public getTeamsId = async (id : number) => {
+    const team = await TeamsModel.findByPk(id);
     return team;
   };
 }
