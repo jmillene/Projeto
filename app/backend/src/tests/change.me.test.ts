@@ -2,11 +2,15 @@ import * as sinon from "sinon";
 import * as chai from "chai";
 // @ts-ignore
 import chaiHttp = require("chai-http");
-
+import mockMatches from "./mocks/matches.mock";
+import matchesFiltrados from "./mocks/matchesFiltrados";
 import { app } from "../app";
 import Example from "../database/models/ExampleModel";
+import * as bcrypt from 'bcryptjs';
 
 import { Response } from "superagent";
+import User from "../database/models/Users";
+import { truncate } from "fs";
 
 chai.use(chaiHttp);
 
@@ -71,5 +75,38 @@ describe("Testando a rota Get", () => {
       expect(httpResponse.status).to.be.equal(401);
       expect(httpResponse.body).to.have.property('message');
   });
+ 
 });
+});
+describe("Testando a rota Get", () => {
+  describe("quando faço uma requisição Get para a rota /matches", () => {
+    it("Testando a rota /matches no back-end", async () => {
+      const httpResponse = await chai.request(app).get("/matches")  
+      expect(httpResponse.status).to.equal(200);
+    })
+    it("Testando a rota /matches no retorna a lista de times", async () => {
+      const httpResponse = await chai.request(app).get("/matches")  
+      expect(httpResponse.body).to.deep.equal(mockMatches);
+    })
+    it("Testando a rota /matches no retorna a lista de times filtrados", async () => {
+      const httpResponse = await chai.request(app).get("/matches?inProgress=true")  
+      expect(httpResponse.body).to.deep.equal(matchesFiltrados);
+    })
+  })
+});
+describe("Testando a rota Get", () => {
+  describe("quando faço uma requisição Get para a rota /teams", () => {
+    it("Testando a rota /teams no back-end", async () => {
+      const httpResponse = await chai.request(app).get("/teams")  
+      expect(httpResponse.status).to.equal(200);
+    })
+    it("Testando a rota /teams se retorna o id do time", async () => {
+      const mock = {
+        "id": 1,
+        "teamName": "Avaí/Kindermann"
+      }
+      const httpResponse = await chai.request(app).get("/teams/1")  
+      expect(httpResponse.body).to.deep.equal(mock);
+    })
+  })
 });
