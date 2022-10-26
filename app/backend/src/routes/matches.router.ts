@@ -17,5 +17,8 @@ userRouter.patch(
   '/:id/finish',
   matchesController.finishedMatches,
 );
-
+userRouter.patch(
+  '/:id',
+  matchesController.uptade,
+);
 export default userRouter;

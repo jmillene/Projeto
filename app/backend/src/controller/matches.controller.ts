@@ -66,4 +66,11 @@ export default class MatchesController {
     await this.service.finishedMatches(id);
     return res.status(200).json({ message: 'Finished' });
   };
+
+  public uptade = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const up = await this.service.update(id, homeTeamGoals, awayTeamGoals);
+    return res.status(200).json(up);
+  };
 }
