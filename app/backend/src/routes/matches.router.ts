@@ -13,5 +13,9 @@ userRouter.get(
   '/',
   matchesController.getMatches,
 );
+userRouter.patch(
+  '/:id/finish',
+  matchesController.finishedMatches,
+);
 
 export default userRouter;

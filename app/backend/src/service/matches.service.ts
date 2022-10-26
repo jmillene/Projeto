@@ -41,4 +41,14 @@ export default class MatchesService {
     );
     return matches;
   };
+
+  public matchesTeamsUndefined = async (id:string) => {
+    const matches = await Matches.findOne({ where: { id } });
+    return matches;
+  };
+
+  public finishedMatches = async (id:string) => {
+    const finished = await Matches.update({ inProgress: false }, { where: { id } });
+    return finished;
+  };
 }
