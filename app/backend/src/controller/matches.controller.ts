@@ -15,7 +15,20 @@ export default class MatchesController {
       );
       return res.status(200).json(matches);
     }
+    if (inProgress) {
+      const matcheFalse = await this.service.getMatchesInprogress(
+        inProgress === 'false',
+      );
+      return res.status(200).json(matcheFalse);
+    }
     const matche = await this.service.getMatches();
     return res.status(200).json(matche);
+  };
+
+  public postMatches = async (req: Request, res: Response) => {
+    const { body } = req;
+    const matche = await this.service.postMatches(body);
+
+    res.status(201).json(matche);
   };
 }

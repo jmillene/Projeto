@@ -4,6 +4,7 @@ import * as chai from "chai";
 import chaiHttp = require("chai-http");
 import mockMatches from "./mocks/matches.mock";
 import matchesFiltrados from "./mocks/matchesFiltrados";
+import matchesFiltradosFalse from "./mocks/matchesFiltradosFalse";
 import { app } from "../app";
 import Example from "../database/models/ExampleModel";
 import * as bcrypt from 'bcryptjs';
@@ -91,6 +92,26 @@ describe("Testando a rota Get", () => {
     it("Testando a rota /matches no retorna a lista de times filtrados", async () => {
       const httpResponse = await chai.request(app).get("/matches?inProgress=true")  
       expect(httpResponse.body).to.deep.equal(matchesFiltrados);
+    })
+    it("Testando a rota /matches no retorna a lista de times filtrados", async () => {
+      const httpResponse = await chai.request(app).get("/matches?inProgress=false")  
+      expect(httpResponse.body).to.deep.equal(matchesFiltradosFalse);
+    })
+    it("Testando a rota /matches salvar uma partida com o status de inProgress como true no banco de dados", async () => {
+      const mock = {
+        "id": 1,
+        "homeTeam": 16,
+        "homeTeamGoals": 2,
+        "awayTeam": 8,
+        "awayTeamGoals": 2,
+        "inProgress": true,
+      }
+      const httpResponse = await chai.request(app).post("/matches")  
+      expect(httpResponse.body).to.deep.equal(mock);
+    })
+    it("Testando a rota /matches retornando o status 201", async () => {
+      const httpResponse = await chai.request(app).get("/")  
+      expect(httpResponse.status).to.equal(httpResponse);
     })
   })
 });

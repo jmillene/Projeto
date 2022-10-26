@@ -110,6 +110,20 @@ const matchesFiltrados = [
     "teamAway": {
       "teamName": "Bahia"
     }
+  },
+  {
+    "id": 49,
+    "homeTeam": 7,
+    "homeTeamGoals": 3,
+    "awayTeam": 11,
+    "awayTeamGoals": 0,
+    "inProgress": 1,
+    "teamHome": {
+      "teamName": "Flamengo"
+    },
+    "teamAway": {
+      "teamName": "Napoli-SC"
+    }
   }
 ]
 export default matchesFiltrados;

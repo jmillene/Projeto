@@ -1,5 +1,6 @@
 import Teams from '../database/models/Teams';
 import Matches from '../database/models/Matches';
+import IMatches from '../interfaces/IMatches';
 
 export default class MatchesService {
   public getMatches = async () => {
@@ -20,6 +21,24 @@ export default class MatchesService {
         { model: Teams, as: 'teamAway', attributes: { exclude: ['id'] } },
       ],
     });
+    return matches;
+  };
+
+  public postMatches = async ({
+    homeTeam,
+    awayTeam,
+    homeTeamGoals,
+    awayTeamGoals,
+
+  // eslint-disable-next-line max-params
+  } : IMatches) => {
+    const matches = await Matches.create(
+      { homeTeam,
+        awayTeam,
+        homeTeamGoals,
+        awayTeamGoals,
+        inProgress: true },
+    );
     return matches;
   };
 }
