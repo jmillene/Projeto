@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import MatchesService from '../service/matches.service';
+import decode from '../utils/Decode';
 
 export default class MatchesController {
   service: MatchesService;
@@ -25,9 +26,25 @@ export default class MatchesController {
     return res.status(200).json(matche);
   };
 
+  // eslint-disable-next-line max-lines-per-function
   public postMatches = async (req: Request, res: Response) => {
     const { body } = req;
     const { homeTeam, awayTeam } = req.body;
+    const { authorization } = req.headers;
+    if (!authorization) {
+      // eslint-disable-next-line sonarjs/no-duplicate-string
+      return res.status(401).json({ message: 'Token must be a valid token' });
+    }
+    try {
+      const token = decode(authorization);
+      if (!token) {
+        return res.status(401).json({ message: 'Token must be a valid token' });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(401).json({ message: 'Token must be a valid token' });
+    }
+
     const matche = await this.service.postMatches(body);
     if (homeTeam === awayTeam) {
       return res
