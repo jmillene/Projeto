@@ -27,6 +27,7 @@ class App {
     this.app.use('/login', userRouter.userRouter);
     this.app.use('/teams', userRouter.teamRouter);
     this.app.use('/matches', userRouter.matchesRouter);
+    this.app.use('/leaderboard/home', userRouter.leaderboardRouter);
     this.app.use(accessControl);
   }
 

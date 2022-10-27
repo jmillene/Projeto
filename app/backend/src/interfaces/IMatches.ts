@@ -3,4 +3,6 @@ export default interface IMatches {
   awayTeam: number,
   homeTeamGoals: number,
   awayTeamGoals: number,
+  id? : number,
+  inProgress?: number,
 }
